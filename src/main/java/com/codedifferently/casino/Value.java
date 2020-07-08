@@ -9,13 +9,14 @@ public enum Value {
 
 
 
-    Value(int value) {
+    private Value(int value) {
         this.cardNum = value;
     }
 
     public int getValue(){
         return this.cardNum;
     }
+
 
 
 
