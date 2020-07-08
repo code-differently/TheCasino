@@ -1,12 +1,14 @@
 import java.util.ArrayList;
 
-public interface Game {
+public interface Game 
+{
 
   public static String gameName; 
   ArrayList<Player> players = new ArrayList<Player>(); 
 
   //returning the name of the Game
-  public static String getGameName() {
+  public static String getGameName() 
+  {
     return gameName;
   }
   //Checking to see if the game is won
@@ -19,7 +21,8 @@ public interface Game {
   public ArrayList<Player> getPlayers(); 
 
   //setting the GameName to a new game
-  public static String changeGameName(String name){
+  public static String changeGameName(String name)
+  {
     return gameName = name;
   }
 
