@@ -7,24 +7,25 @@ import java.util.Random;
 public class Deck {
 
     private ArrayList<Card> deck;
-    private int numCards;
 
     public Deck(){
         deck = new ArrayList<Card>();
-        numCards = 0;
     }
 
     public void addCard(Card x) {
         deck.add(x);
-        numCards++;
     }
 
     public void removeCard() {
         Random rand = new Random();
-        int n = rand.nextInt(numCards);
+        int n = rand.nextInt(deck.size());
         //doesn't need to be set to a variable
         deck.remove(n);
-        numCards--;
+    }
+
+    public Card removeCard(Card card) {
+        //gets the index of the card and returns it
+        return deck.remove(deck.indexOf(card));
     }
 
     public void shuffle(){
@@ -32,10 +33,11 @@ public class Deck {
     }
 
     public int getNumCards(){
-        return numCards;
+        return deck.size();
     }
 
     public ArrayList<Card> getDeck(){
         return deck;
     }
+
 }

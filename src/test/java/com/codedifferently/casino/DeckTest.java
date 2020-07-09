@@ -42,7 +42,7 @@ public class DeckTest {
     }
 
     @Test
-    public void removeCardTest(){
+    public void removeCardRandomlyTest(){
 
         // Given
         testDeck.addCard(testCard);
@@ -54,7 +54,22 @@ public class DeckTest {
 
         // Then
         Assert.assertEquals("This is removeCardTest", expected, actual);
+    }
 
+    @Test
+    public void removeSpecificCardTest(){
+
+        // Given
+        Card expectedCard = new Card(Suit.HEARTS, Value.EIGHT);
+        String expectedString = expectedCard.toString();
+
+        // When
+        testDeck.addCard(expectedCard);
+        Card actualCard = testDeck.removeCard(expectedCard);
+        String actualString = actualCard.toString();
+
+        // Then
+        Assert.assertEquals("This is removeCardTest", expectedString, actualString);
     }
 
     @Test
