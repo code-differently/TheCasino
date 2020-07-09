@@ -90,4 +90,17 @@ public class DeckTest {
         Assert.assertNotEquals(original, testDeck.getDeck());
     }
 
+    @Test
+    public void correctDeckGenerator()
+    {
+        Deck d = new Deck();
+        int correctSize = 3;
+
+        ArrayList<Card> cards = d.generateDeck(3);
+
+        int realSize = cards.size();
+
+        Assert.assertEquals(correctSize, realSize);
+    }
+
 }
