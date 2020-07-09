@@ -12,38 +12,30 @@ public class Deck {
     public Deck(){
         deck = new ArrayList<Card>();
         numCards = 0;
-
     }
 
-    public void  addCard(Card x) {
-
+    public void addCard(Card x) {
         deck.add(x);
         numCards++;
     }
 
-    public Card removeCard(){
-
+    public void removeCard() {
         Random rand = new Random();
         int n = rand.nextInt(numCards);
-        Card temp = deck.remove(n);
+        //doesn't need to be set to a variable
+        deck.remove(n);
         numCards--;
-        return temp;
     }
 
     public void shuffle(){
-
         Collections.shuffle(deck);
-
     }
 
     public int getNumCards(){
-
         return numCards;
     }
 
-    public ArrayList getDeck(){
-
+    public ArrayList<Card> getDeck(){
         return deck;
     }
-
 }

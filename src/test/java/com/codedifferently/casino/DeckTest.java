@@ -1,5 +1,6 @@
 package com.codedifferently.casino;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.Assert;
 
@@ -7,13 +8,28 @@ import java.util.ArrayList;
 
 
 public class DeckTest {
+    Deck testDeck;
+    Card testCard;
+
+    @Before
+    public void initialize() {
+        testDeck = new Deck();
+        testCard = new Card();
+    }
 
     @Test
-    public void  addCardTest() {
+    public void constructorTest() {
+        int expectedNumCards = 0;
+
+        int actualNumCards = testDeck.getNumCards();
+
+        Assert.assertEquals(expectedNumCards, actualNumCards);
+    }
+
+    @Test
+    public void addCardTest() {
 
         // Given
-        Deck testDeck = new Deck();
-        Card testCard = new Card();
         int expected = 1;
 
         // When
@@ -29,9 +45,7 @@ public class DeckTest {
     public void removeCardTest(){
 
         // Given
-        Deck testDeck = new Deck();
-        Card testCard1 = new Card();
-        testDeck.addCard(testCard1);
+        testDeck.addCard(testCard);
         int expected = 0;
 
         // When
@@ -47,21 +61,18 @@ public class DeckTest {
     public void shuffleTest(){
 
         // Given
-        Deck testDeck = new Deck();
-        Card testCard1 = new Card();
         Card testCard2 = new Card();
         Card testCard3 = new Card();
-        testDeck.addCard(testCard1);
+        testDeck.addCard(testCard);
         testDeck.addCard(testCard2);
         testDeck.addCard(testCard3);
-        ArrayList<Card> Temp = new ArrayList<Card>(testDeck.getDeck());
+        ArrayList<Card> original = new ArrayList<Card>(testDeck.getDeck());
 
         // When
         testDeck.shuffle();
 
         // Then
-
-        Assert.assertNotEquals(Temp, testDeck.getDeck());
+        Assert.assertNotEquals(original, testDeck.getDeck());
     }
 
 }
