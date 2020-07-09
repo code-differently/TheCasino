@@ -31,24 +31,20 @@ public class DeckTest {
         // Given
         Deck testDeck = new Deck();
         Card testCard1 = new Card();
-        Card testCard2 = new Card();
-        Card testCard3 = new Card();
         testDeck.addCard(testCard1);
-        testDeck.addCard(testCard2);
-        testDeck.addCard(testCard3);
-        int expected = 2;
+        int expected = 0;
 
         // When
         testDeck.removeCard();
         int actual = testDeck.getNumCards();
 
         // Then
-        Assert.assertEquals("This is addCardTest", expected, actual);
+        Assert.assertEquals("This is removeCardTest", expected, actual);
 
     }
 
     @Test
-    public void suffleTest(){
+    public void shuffleTest(){
 
         // Given
         Deck testDeck = new Deck();

@@ -6,8 +6,14 @@ import java.util.Random;
 
 public class Deck {
 
-    private ArrayList<Card> deck = new ArrayList<Card>();
-    private int numCards = 0;
+    private ArrayList<Card> deck;
+    private int numCards;
+
+    public Deck(){
+        deck = new ArrayList<Card>();
+        numCards = 0;
+
+    }
 
     public void  addCard(Card x) {
 
