@@ -44,8 +44,8 @@ public class CardTest {
 
     @Test
     public void setValueTest() {
-        Value expectedValue = Value.ACEVALUEOF1;
-        testCard.setValue(Value.ACEVALUEOF1);
+        Value expectedValue = Value.ONE;
+        testCard.setValue(Value.ONE);
         Value actualValue = testCard.getValue();
 
         Assert.assertEquals(expectedValue, actualValue);
