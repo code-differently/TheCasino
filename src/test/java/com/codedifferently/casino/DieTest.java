@@ -13,7 +13,7 @@ public class DieTest {
     }
 
     @Test
-    public void testDieConstructor() {
+    public void constructorWithValueTest() {
         //given
         int expectedValue = 3;
 
@@ -37,19 +37,33 @@ public class DieTest {
     }
 
     @Test
-    public void setDieTest() {
+    public void setDieInBoundsTest() {
         //given
         int expectedValue = 6;
-        //its 6 because that's what I set the die to in the test below, and the code should return the latest value of the die
-        int errorValueExpected = 6;
 
         //when
         die.setValue(6);
 
         //then
         Assert.assertEquals("testing dice constructor", expectedValue, die.getValue());
+    }
 
+    @Test
+    public void setDieNegativeErrorTest() {
+        //its 3 because that's what I set the die to in the @Before portion, the code should not change anything so the value should be 3
+        //should be in the range 1 and 6
+        int errorValueExpected = 3;
         die.setValue(-4);
+        int errorValueActual = die.getValue();
+        Assert.assertEquals("testing if value returned is what it was set to after the first set die.", errorValueExpected ,errorValueActual);
+    }
+
+    @Test
+    public void setDieAboveThresholdTest() {
+        //its 3 because that's what I set the die to in the @Before portion, the code should not change anything so the value should be 3
+        //should be in the range 1 and 6
+        int errorValueExpected = 3;
+        die.setValue(9);
         int errorValueActual = die.getValue();
         Assert.assertEquals("testing if value returned is what it was set to after the first set die.", errorValueExpected ,errorValueActual);
     }

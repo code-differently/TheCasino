@@ -12,8 +12,8 @@ public class Die {
     }
 
     public void setValue(int val) {
-        if(val < 0) {
-            System.out.println("Can't put in a negative value. The value of the die will not be changed");
+        if(val < 0 || val > 6) {
+            System.out.println("Can't put in a negative value or a value greater than 6. The value of the die will not be changed");
         }
         else {
             this.value = val;
