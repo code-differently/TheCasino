@@ -117,6 +117,17 @@ public class PlayerTest {
     }
 
     @Test
+    public void setOneCardTest() {
+        String expectedCardValue = "FIVE of DIAMONDS ";
+        Card card = new Card(Suit.DIAMONDS, Value.FIVE);
+
+        defaultPlayer.setOneCard(card);
+        String actualCardValue = defaultPlayer.printOutCards();
+
+        Assert.assertEquals(expectedCardValue, actualCardValue);
+    }
+
+    @Test
     public void toStringTest() {
         String expectedString = "Players name is: Unknown Name, Players money is: 0.0, Players score is: 0, Players cards are: No cards available at this time. Add a card to show the suit and value of each individual card";
 

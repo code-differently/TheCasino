@@ -6,15 +6,21 @@ import java.util.Map;
 
 public class WarGame extends Game
 {
+    private Deck deck;
+    public WarGame() {
+        deck = new Deck();
+    }
+
     public void startGame()
     {
+        deck.generateSpecificSizedDeck(52);
         System.out.println("Welcome to the Card Game War!");
         System.out.println("There are 2 players for this game.");
         System.out.println();
 
-        super.playerOne = new Player("Bill", 0.0, 1, new Deck().generateDeck(5));
-        super.playerTwo = new Player("Mandy", 0.0, 1, new Deck().generateDeck(5));
-
+        super.playerOne = new Player("Bill", 0.0, 1, deck.dealMultipleCards(5));
+        super.playerTwo = new Player("Mandy", 0.0, 1, deck.dealMultipleCards(5));
+        //System.out.println("deck size:" + deck.getNumCards());
         int score1 = 0;
         int score2 = 0;
 
@@ -68,13 +74,13 @@ public class WarGame extends Game
     public void tieMessage()
     {
         System.out.println("Looks like there is a tie, we have chosen your tie breaking cards");
-        playerOne.setCards(new Deck().generateDeck(1));
+        playerOne.setOneCard(deck.dealRandomCard());
         System.out.println(super.playerOne.getName() + " your card's value is " + playerOne.getCards().get(0).getValue() + " better hope "
                 + super.playerTwo.getName() + " doesn't have a higher card");
 
         super.playerOne.setScore(playerOne.getCards().get(0).getValue().getValue());
         System.out.println(super.playerTwo.getName() + " we have selected your card, to keep it suspenseful, we wont tell you your card...");
-        playerTwo.setCards(new Deck().generateDeck(1));
+        playerTwo.setOneCard(deck.dealRandomCard());
         super.playerTwo.setScore(playerTwo.getCards().get(0).getValue().getValue());
         System.out.println();
         checkStandings();

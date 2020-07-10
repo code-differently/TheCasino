@@ -58,6 +58,8 @@ public class Player {
         this.cards = cards;
     }
 
+    public void setOneCard(Card deckCard) {this.cards.add(deckCard);}
+
     public String toString() {
         return "Players name is: " + this.name + ", Players money is: " + this.money + ", Players score is: " + this.getScore() + ", Players cards are: " + this.printOutCards();
     }
@@ -66,7 +68,7 @@ public class Player {
         StringBuilder stringOfCards = new StringBuilder();
         if(this.getCards().size() > 0) {
             for (Card card: this.getCards()) {
-                System.out.println("here");
+                //System.out.println("here");
                 stringOfCards.append(card.toString() + " ");
             }
         }
