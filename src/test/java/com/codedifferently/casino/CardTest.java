@@ -58,7 +58,4 @@ public class CardTest {
 
         Assert.assertEquals(expectedString, actualString);
     }
-
-
-
 }
