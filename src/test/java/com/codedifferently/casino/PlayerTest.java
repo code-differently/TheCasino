@@ -15,11 +15,9 @@ public class PlayerTest {
         boolean expectedHasWon = false;
         String actualName = p1.getName();
         double actualMoney = p1.getMoney();
-        boolean actualHasWon = p1.getHasWon();
 
         Assert.assertEquals(expectedName, actualName);
         Assert.assertEquals(expectedMoney, actualMoney, 0.001);
-        Assert.assertEquals(expectedHasWon, actualHasWon);
     }
 
     @Test
@@ -32,11 +30,9 @@ public class PlayerTest {
         boolean expectedHasWon = false;
         String actualName = p1.getName();
         double actualMoney = p1.getMoney();
-        boolean actualHasWon = p1.getHasWon();
 
         Assert.assertEquals(expectedName, actualName);
         Assert.assertEquals(expectedMoney, actualMoney, 0.00);
-        Assert.assertEquals(expectedHasWon, actualHasWon);
     }
 
     @Test
@@ -49,11 +45,9 @@ public class PlayerTest {
         boolean expectedHasWon = false;
         String actualName = p1.getName();
         double actualMoney = p1.getMoney();
-        boolean actualHasWon = p1.getHasWon();
 
         Assert.assertEquals(expectedName, actualName);
         Assert.assertEquals(expectedMoney, actualMoney, 0.00);
-        Assert.assertEquals(expectedHasWon, actualHasWon);
     }
 
     @Test
@@ -67,11 +61,9 @@ public class PlayerTest {
         boolean expectedHasWon = false;
         String actualName = p1.getName();
         double actualMoney = p1.getMoney();
-        boolean actualHasWon = p1.getHasWon();
 
         Assert.assertEquals(expectedName, actualName);
         Assert.assertEquals(expectedMoney, actualMoney, 0.00);
-        Assert.assertEquals(expectedHasWon, actualHasWon);
     }
 
     @Test
@@ -96,15 +88,7 @@ public class PlayerTest {
         Assert.assertEquals(expectedMoney, actualMoney, 0.00);
     }
 
-    @Test
-    public void getHasWonTest() {
-        p1 = new Player();
 
-        boolean expectedHasWon = false;
-        boolean actualHasWon = p1.getHasWon();
-
-        Assert.assertEquals(expectedHasWon, actualHasWon);
-    }
 
 
     @Test
@@ -129,18 +113,6 @@ public class PlayerTest {
         double actualMoney = p1.getMoney();
 
         Assert.assertEquals(expectedMoney, actualMoney, 0.00);
-    }
-
-    @Test
-    public void setHasWonTest() {
-        boolean hasWon = true;
-        p1 = new Player();
-
-        boolean expectedHasWon = hasWon ;
-        p1.setHasWon(hasWon);
-        boolean actualHasWon = p1.getHasWon();
-
-        Assert.assertEquals(expectedHasWon, actualHasWon);
     }
 
 }
