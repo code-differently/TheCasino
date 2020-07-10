@@ -1,15 +1,32 @@
 package com.codedifferently.casino;
 
-public interface Gamble
+public abstract class Gamble extends Game
 {
-    //set the default prize to money
-    String prize = "Money";
-    //set the default moneyType to money
-    String moneyType = "Money";
+    private String moneyType;
+    private String prize;
 
-    public void wageMoney(double money);
-    public String getMoneyType();
-    public void setMoneyType(String moneyType);
-    public String getPrize();
-    public void setPrize(String prize);
+    public double wageMoney(Player p, double d)
+    {
+        p.setMoney(p.getMoney() - d);
+        return d;
+    }
+
+    public String getMoneyType()
+    {
+        return moneyType;
+    }
+    public void setMoneyType(String moneyType)
+    {
+        this.moneyType = moneyType;
+    }
+
+    public String getPrize()
+    {
+        return prize;
+    }
+
+    public void setPrize(String prize)
+    {
+        this.prize = prize;
+    }
 }
