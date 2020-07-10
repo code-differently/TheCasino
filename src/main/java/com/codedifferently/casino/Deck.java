@@ -51,9 +51,9 @@ public class Deck {
                 };
         ArrayList<Card> allCards = new ArrayList<Card>();
 
-        for(int i = 0; i <= 12; i++)
+        for(int i = 0; i < cardNumbers.length; i++)
         {
-            for(int j = 0; j <= 3; j++)
+            for(int j = 0; j < cardFaces.length; j++)
             {
                 allCards.add(new Card(cardFaces[j], cardNumbers[i]));
             }

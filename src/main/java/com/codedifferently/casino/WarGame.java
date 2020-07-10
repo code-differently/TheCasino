@@ -16,8 +16,8 @@ public class WarGame extends Game
         System.out.println("Welcome to the Card Game War!");
         System.out.println("There are 2 players for this game.");
         playersHand = new HashMap<Player, ArrayList<Card>>();
-        super.playerOne = new Player("Bill");
-        super.playerTwo = new Player("Mandy");
+        //super.playerOne = new Player("Bill");
+        //super.playerTwo = new Player("Mandy");
 
 
         playersHand.put(super.playerOne, new Deck().generateDeck(5));
