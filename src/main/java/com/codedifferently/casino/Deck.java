@@ -23,6 +23,51 @@ public class Deck {
         deck.remove(n);
     }
 
+    public ArrayList<Card> generateDeck(int numberOfCardsInDeck)
+    {
+        Value[] cardNumbers =
+                {
+                        Value.ONE,
+                        Value.TWO,
+                        Value.THREE,
+                        Value.FOUR,
+                        Value.FIVE,
+                        Value.SIX,
+                        Value.SEVEN,
+                        Value.EIGHT,
+                        Value.NINE,
+                        Value.TEN,
+                        Value.JACK,
+                        Value.QUEEN,
+                        Value.KING,
+                        Value.ACE
+                };
+        Suit[] cardFaces =
+                {
+                        Suit.SPADES,
+                        Suit.HEARTS,
+                        Suit.DIAMONDS,
+                        Suit.CLUBS
+                };
+        ArrayList<Card> allCards = new ArrayList<Card>();
+
+        for(int i = 0; i <= 12; i++)
+        {
+            for(int j = 0; j <= 3; j++)
+            {
+                allCards.add(new Card(cardFaces[j], cardNumbers[i]));
+            }
+        }
+
+        for(int i = 1; i <= numberOfCardsInDeck; i++)
+        {
+            int r = (int) (Math.random() * (52 - 1));
+            deck.add(allCards.get(r));
+        }
+
+        return deck;
+    }
+
     public Card removeCard(Card card) {
         //gets the index of the card and returns it
         return deck.remove(deck.indexOf(card));
@@ -39,5 +84,4 @@ public class Deck {
     public ArrayList<Card> getDeck(){
         return deck;
     }
-
 }

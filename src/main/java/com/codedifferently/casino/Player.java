@@ -4,13 +4,13 @@ public class Player {
     // declaring variables
     private String name;
     private double money;
-    boolean hasWon;
+    private int score;
 
     // overloading constructor
     public Player() {
         name = "Unknown Name";
         money = 0.00;
-        hasWon = false;
+        score = 0;
     }
 
     public Player(String name) {
@@ -46,11 +46,12 @@ public class Player {
         this.money = money;
     }
 
-    public boolean getHasWon() {
-        return hasWon;
+    public int getScore()
+    {
+        return this.score;
     }
-
-    public void setHasWon(boolean hasWon) {
-        this.hasWon = hasWon;
+    public void setScore(int score)
+    {
+        this.score = score;
     }
 }
