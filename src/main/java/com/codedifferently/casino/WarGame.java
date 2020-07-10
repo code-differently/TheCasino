@@ -6,61 +6,55 @@ import java.util.Map;
 
 public class WarGame extends Game
 {
-    //have the players hand in a hash map
-    //ex. Player 1 -> ACE of SPADES, 8 of DIAMONDS
-    //ex. Player 2 -> ...
-    HashMap<Player, ArrayList<Card>> playersHand;
-
     public void startGame()
     {
         System.out.println("Welcome to the Card Game War!");
         System.out.println("There are 2 players for this game.");
-        playersHand = new HashMap<Player, ArrayList<Card>>();
-        //super.playerOne = new Player("Bill");
-        //super.playerTwo = new Player("Mandy");
+        System.out.println();
 
-
-        playersHand.put(super.playerOne, new Deck().generateDeck(5));
-        playersHand.put(super.playerTwo, new Deck().generateDeck(5));
-
+        super.playerOne = new Player("Bill", 0.0, 1, new Deck().generateDeck(5));
+        super.playerTwo = new Player("Mandy", 0.0, 1, new Deck().generateDeck(5));
 
         int score1 = 0;
         int score2 = 0;
-        for(Map.Entry<Player, ArrayList<Card>> playerCardEntry : playersHand.entrySet())
+
+        //playing 5 times
+        for(int i = 0; i < super.playerOne.getCards().size(); i++)
         {
-            for(Card c : playerCardEntry.getValue())
-            {
-                Player p = playerCardEntry.getKey();
+            System.out.println(super.playerOne.getName() + " your card is a " + super.playerOne.getCards().get(i));
+            System.out.println(super.playerTwo.getName() + " your card is a " +super.playerTwo.getCards().get(i));
 
-                int playerOneValue = 0;
-                int playerTwoValue = 0;
-                if(p.getName().equals(super.playerOne.getName()))
-                {
-                    System.out.println(p.getName() + " you've layed down a " + c.toString());
-                    //the first getValue calls the method from card, then it calls the one from value
-                    playerOneValue = c.getValue().getValue();
-                }
-                if(p.getName().equals(super.playerTwo.getName()))
-                {
-                    System.out.println(p.getName() + " you've layed down a " + c.toString());
-                    playerTwoValue = c.getValue().getValue();
-                }
+            //first getValue gets the enums value, second getValue gets the int value of the enum
+            int playerOneCardValue = super.playerOne.getCards().get(i).getValue().getValue();
+            int playerTwoCardValue = super.playerTwo.getCards().get(i).getValue().getValue();
 
-                if(playerOneValue > playerTwoValue)
-                {
-                    System.out.println("Ha! Player One has won this round of war");
-                    super.playerOne.setScore(score1++);
-                    System.out.println();
-                }
-                else if(playerTwoValue > playerOneValue)
-                {
-                    System.out.println("Ha! Player Two has won this round of war");
-                    super.playerTwo.setScore(score2++);
-                    System.out.println();
-                }
-            }
+            score1 = super.playerOne.getScore();
+            score2 = super.playerTwo.getScore();
+
+            checkScore(playerOneCardValue, playerTwoCardValue, score1, score2);
+
+            System.out.println();
         }
+
         checkStandings();
+    }
+
+    public void checkScore(int playerOneCardValue, int playerTwoCardValue, int score1, int score2)
+    {
+        if(playerOneCardValue > playerTwoCardValue)
+        {
+            System.out.println("Nice! " + super.playerOne.getName() + " you won this round.");
+            super.playerOne.setScore(score1++);
+        }
+        if(playerOneCardValue < playerTwoCardValue)
+        {
+            System.out.println("Nice! " + super.playerTwo.getName() + " you won this round.");
+            super.playerTwo.setScore(score2++);
+        }
+        if(playerOneCardValue == playerTwoCardValue)
+        {
+            System.out.println("issa tie");
+        }
     }
 
     @Override
@@ -73,31 +67,31 @@ public class WarGame extends Game
     @Override
     public void tieMessage()
     {
-//        System.out.println("Looks like there is a tie, we have chosen your tie breaking cards");
-//        ArrayList<Card> playerOnesTie = new Deck().generateDeck(1);
-//        System.out.println(super.playerOne.getName() + " your card's value is " + playerOnesTie.get(0).getValue() + " better hope "
-//                + super.playerTwo.getName() + " doesn't have a higher card");
-//
-//        super.playerOne.setScore(playerOnesTie.get(0).getValue().getValue());
-//        System.out.println(super.playerTwo.getName() + " we have selected your card, to keep it suspenseful, we wont tell you your card...");
-//        ArrayList<Card> playerTwoTie = new Deck().generateDeck(1);
-//        super.playerTwo.setScore(playerTwoTie.get(0).getValue().getValue());
-//        checkStandings();
+        System.out.println("Looks like there is a tie, we have chosen your tie breaking cards");
+        playerOne.setCards(new Deck().generateDeck(1));
+        System.out.println(super.playerOne.getName() + " your card's value is " + playerOne.getCards().get(0).getValue() + " better hope "
+                + super.playerTwo.getName() + " doesn't have a higher card");
 
+        super.playerOne.setScore(playerOne.getCards().get(0).getValue().getValue());
+        System.out.println(super.playerTwo.getName() + " we have selected your card, to keep it suspenseful, we wont tell you your card...");
+        playerTwo.setCards(new Deck().generateDeck(1));
+        super.playerTwo.setScore(playerTwo.getCards().get(0).getValue().getValue());
+        System.out.println();
+        checkStandings();
     }
 
-    @Override
+
     public void checkStandings()
     {
         if(super.playerOne.getScore() > super.playerTwo.getScore())
         {
-            super.winnerMessage(super.playerOne);
-            super.losingMessage(super.playerTwo);
+            System.out.println(super.winnerMessage(super.playerOne));
+            System.out.println(super.losingMessage(super.playerTwo));
         }
         else if(super.playerTwo.getScore() > super.playerOne.getScore())
         {
-            super.winnerMessage(super.playerTwo);
-            super.losingMessage(super.playerOne);
+            System.out.println(super.winnerMessage(super.playerTwo));
+            System.out.println(super.losingMessage(super.playerOne));
         }
         else
         {
