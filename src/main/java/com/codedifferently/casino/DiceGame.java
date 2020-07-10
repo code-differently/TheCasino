@@ -33,7 +33,7 @@ public class DiceGame extends Game
     public void checkStandings() {
         if(userGuess != correctRole)
         {
-            System.out.println("Awwww, sorry! Your guess was " + (correctRole - userGuess) + " away from the correct role of " + correctRole);
+            System.out.println("Awwww, sorry! Your guess was " + Math.abs(correctRole - userGuess) + " away from the correct role of " + correctRole);
         }
         else
         {
