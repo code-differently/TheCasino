@@ -74,7 +74,7 @@ public class Casino {
                 //new GoFish().startGame();
                 mainMenu();
             case 4:
-                //new Craps().startGame();
+                new Craps().startGame();
                 mainMenu();
             case 5:
                 new BlackJack().startGame();

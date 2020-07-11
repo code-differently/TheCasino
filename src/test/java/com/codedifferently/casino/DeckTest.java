@@ -74,7 +74,11 @@ public class DeckTest {
         testDeck.addCard(oneOfSpades);
 
         // When
+<<<<<<< HEAD
         //its random so sometimes the order will not be the same
+=======
+        //it deals randomly so sometimes the order will not be the same
+>>>>>>> f2239dee8bbbaa0890c58e5621a2cb3b88849e46
         ArrayList<Card> actualCards = testDeck.dealMultipleCards(2);
 
         // Then
@@ -91,6 +95,19 @@ public class DeckTest {
         int actualSize = testDeck.getNumCards();
 
         Assert.assertEquals(expectedSize, actualSize);
+<<<<<<< HEAD
+=======
+    }
+
+    @Test
+    public void generateNonRandomizedSpecificSizedDeckTest() {
+        int expectedSize = 3;
+
+        testDeck.generateNonRandomizedSpecificSizedDeck(3);
+        int actualSize = testDeck.getNumCards();
+
+        Assert.assertEquals(expectedSize, actualSize);
+>>>>>>> f2239dee8bbbaa0890c58e5621a2cb3b88849e46
     }
 
     @Test
@@ -119,4 +136,8 @@ public class DeckTest {
 
         Assert.assertEquals(expected, actual);
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> f2239dee8bbbaa0890c58e5621a2cb3b88849e46
