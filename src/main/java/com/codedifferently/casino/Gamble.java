@@ -1,4 +1,5 @@
 package com.codedifferently.casino;
+
 public abstract class Gamble extends Game
 {
     private String moneyType;
@@ -24,4 +25,6 @@ public abstract class Gamble extends Game
     {
         this.prize = prize;
     }
+
 }
+

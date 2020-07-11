@@ -5,12 +5,12 @@ import java.util.Scanner;
 
 public class BlackJack extends Gamble {
     // declared variables
-    final int MAX_SCORE = 21;
-    Deck gameDeck = new Deck();
-    Scanner objScanner = new Scanner(System.in);
-    int input;
-    double moneyWaged;
-    boolean gameOver = false;
+    private final int MAX_SCORE = 21;
+    private Deck gameDeck = new Deck();
+    private Scanner objScanner = new Scanner(System.in);
+    private int input;
+    private double moneyWaged;
+    private boolean gameOver = false;
 
     public static void main(String[] args)
     {
@@ -188,6 +188,10 @@ public class BlackJack extends Gamble {
             System.out.println("You've selected a number not listed, please retry your selection");
             displayOptions();
         }
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
     }
 
     @Override

@@ -37,10 +37,11 @@ public class Deck {
         Random rand = new Random();
         for(int i = 0; i < numCards; i++) {
             int n = rand.nextInt(deck.size());
-<<<<<<< HEAD
+
             //doesn't need to be set to a variable
-=======
->>>>>>> f2239dee8bbbaa0890c58e5621a2cb3b88849e46
+
+            //doesn't need to be set to a variable
+
             Card cardToBeDistributed = deck.remove(n);
             removedCards.add(cardToBeDistributed);
         }
@@ -93,8 +94,7 @@ public class Deck {
             int r = (int) (Math.random() * (52 - 1));
             deck.add(allCards.get(r));
         }
-<<<<<<< HEAD
-=======
+
     }
 
     /**
@@ -141,7 +141,6 @@ public class Deck {
         {
             deck.add(allCards.get(i));
         }
->>>>>>> f2239dee8bbbaa0890c58e5621a2cb3b88849e46
     }
 
     public void shuffle(){
