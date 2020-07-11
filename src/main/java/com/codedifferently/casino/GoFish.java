@@ -3,13 +3,13 @@ package com.codedifferently.casino;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.Scanner;
 
 public class GoFish extends Game {
     //track each individual card value i.e. 1, 2, 3, 4, etc. and its number of occurences in the hand
     private HashMap<Player, HashMap<Integer, ArrayList<Card>>> playerHands;
     private Deck deck;
     private boolean playerOneTurn = true;
-    ;
 
     public GoFish() {
         playerHands = new HashMap<Player, HashMap<Integer, ArrayList<Card>>>();
@@ -36,6 +36,11 @@ public class GoFish extends Game {
         this.deck.generateNonRandomizedSpecificSizedDeck(56);
 
         System.out.println("Welcome to Go Fish! Each player will get 7 cards");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Please enter your name: ");
+
+        //scans until the next line, trims anything before and after
+        super.playerOne.setName(scanner.nextLine().trim());
 
         //each player will get 7 cards
         for(int i = 0; i < 14; i++) {
@@ -64,10 +69,14 @@ public class GoFish extends Game {
             else {
                 initiateTradeSequence(playerTwo, playerOne,0, false);
             }
+            //every deletion of 10 cards results in this print statement
+            if(this.deck.getNumCards() % 10 == 0) {
+                System.out.println("There are " + this.deck.getNumCards() + " cards remaining in the deck.");
+            }
         }
 
         System.out.println();
-        System.out.println("Since the deck is out of cards, time to see the final score...");
+        System.out.println("Since the deck is out of cards, it's time to see the final score...");
         System.out.println();
 
         checkStandings();
@@ -152,6 +161,16 @@ public class GoFish extends Game {
         }
     }
 
+//    public String printOutCards(Player player) {
+//        //goes from 0 to 13
+//        for(int whichValue = 1; whichValue < 14; whichValue++) {
+//            for(Card card: this.getPlayerHands().get(player).get(whichValue)) {
+//
+//            }
+//        }
+//
+//    }
+
     public void resetGame() {
         super.playerOne = new Player();
         super.playerTwo = new Player();
@@ -176,5 +195,6 @@ public class GoFish extends Game {
         {
             tieMessage();
         }
+        System.out.println();
     }
 }

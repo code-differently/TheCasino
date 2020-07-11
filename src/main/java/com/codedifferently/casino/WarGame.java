@@ -74,6 +74,9 @@ public class WarGame extends Game
     public void tieMessage()
     {
         System.out.println("Looks like there is a tie, we have chosen your tie breaking cards");
+        if(deck.getNumCards() == 0) {
+            deck.generateSpecificSizedDeck(25);
+        }
         playerOne.setOneCard(deck.dealRandomCard());
         System.out.println(super.playerOne.getName() + " your card's value is " + playerOne.getCards().get(0).getValue() + " better hope "
                 + super.playerTwo.getName() + " doesn't have a higher card");
@@ -93,11 +96,13 @@ public class WarGame extends Game
         {
             System.out.println(super.winnerMessage(super.playerOne));
             System.out.println(super.losingMessage(super.playerTwo));
+            System.out.println();
         }
         else if(super.playerTwo.getScore() > super.playerOne.getScore())
         {
             System.out.println(super.winnerMessage(super.playerTwo));
             System.out.println(super.losingMessage(super.playerOne));
+            System.out.println();
         }
         else
         {
