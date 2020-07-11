@@ -37,6 +37,11 @@ public class Deck {
         Random rand = new Random();
         for(int i = 0; i < numCards; i++) {
             int n = rand.nextInt(deck.size());
+
+            //doesn't need to be set to a variable
+
+            //doesn't need to be set to a variable
+
             Card cardToBeDistributed = deck.remove(n);
             removedCards.add(cardToBeDistributed);
         }
@@ -89,6 +94,7 @@ public class Deck {
             int r = (int) (Math.random() * (52 - 1));
             deck.add(allCards.get(r));
         }
+
     }
 
     /**

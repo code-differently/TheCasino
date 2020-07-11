@@ -1,5 +1,6 @@
 package com.codedifferently.casino;
 
+
 public class Card {
     // enum types of suit and value
     private Suit suit;

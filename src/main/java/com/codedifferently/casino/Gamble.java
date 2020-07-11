@@ -31,3 +31,4 @@ public abstract class Gamble extends Game
         this.prize = prize;
     }
 }
+

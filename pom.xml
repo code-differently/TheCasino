@@ -9,6 +9,14 @@
     <version>1.0-SNAPSHOT</version>
 
 
+<<<<<<< HEAD
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+=======
+>>>>>>> 7c491ca89cf8825e281a3a1bd81492e6f7315af7
     <dependencies>
         <dependency>
             <groupId>junit</groupId>

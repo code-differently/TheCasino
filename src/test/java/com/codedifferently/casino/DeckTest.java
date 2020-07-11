@@ -49,7 +49,7 @@ public class DeckTest {
     }
 
     @Test
-    public void dealSpecifiedCardTest(){
+    public void dealSpecifiedCardTest() {
 
         // Given
         testDeck.addCard(testCard);
@@ -62,7 +62,7 @@ public class DeckTest {
     }
 
     @Test
-    public void dealMultipleCardTest(){
+    public void dealMultipleCardTest() {
 
         // Given
         ArrayList<Card> cardCheck = new ArrayList<Card>();
@@ -74,11 +74,13 @@ public class DeckTest {
         testDeck.addCard(oneOfSpades);
 
         // When
+        //its random so sometimes the order will not be the same
         //it deals randomly so sometimes the order will not be the same
+        //its random so sometimes the order will not be the same
         ArrayList<Card> actualCards = testDeck.dealMultipleCards(2);
 
         // Then
-        for(int i = 0; i < actualCards.size(); i++) {
+        for (int i = 0; i < actualCards.size(); i++) {
             Assert.assertEquals(cardCheck.get(i).toString(), actualCards.get(i).toString());
         }
     }
@@ -104,7 +106,7 @@ public class DeckTest {
     }
 
     @Test
-    public void shuffleTest(){
+    public void shuffleTest() {
 
         // Given
         Card testCard2 = new Card();

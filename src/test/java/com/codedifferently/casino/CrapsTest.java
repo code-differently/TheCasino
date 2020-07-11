@@ -15,20 +15,18 @@ public class CrapsTest {
 
         //When
         Assert.assertEquals(5, craps.getMinBet());
-
     }
+  
     @Test
     public void getMinBet(){
         //Given
         Craps craps= new Craps();
-
 
         //Then
         craps.setMinBet(5);
 
         //When
         Assert.assertEquals(craps.getMinBet(),5);
-
     }
 
     @Test
@@ -41,13 +39,12 @@ public class CrapsTest {
 
         //When
         Assert.assertEquals(5000, craps.getMaxBet());
-
     }
+  
     @Test
     public void getMaxBet(){
         //Given
         Craps craps= new Craps();
-
 
         //Then
         craps.setMaxBet(5000);
@@ -61,16 +58,10 @@ public class CrapsTest {
         //Given
         Craps craps = new Craps();
 
-
-
         //when
         int value = craps.rollMultipleDice();
-
 
         //then
         Assert.assertTrue("testing if roll dice returns a valid number", value >= 1 && value <= 12);
     }
-
-
-
 }

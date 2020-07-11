@@ -8,7 +8,6 @@ public class Craps extends Gamble{
     private ArrayList<Die> dice;
     private int timeGamePlayed;
 
-
     public Craps(){
         dice = new ArrayList<>();
         dice.add(new Die());
@@ -20,7 +19,6 @@ public class Craps extends Gamble{
 
     public static void main(String [] args){
         new Craps().startGame();
-
     }
 
     public void setMinBet(int theMinBet){
@@ -70,21 +68,16 @@ public class Craps extends Gamble{
                 playerOne.setScore(playerOne.getScore() + 1);
                 System.out.println("You won this round!");
                 System.out.println();
-
             }else if(sumOfDiceRolled == 2 || sumOfDiceRolled == 3 || sumOfDiceRolled == 12){
                 super.losingMessage(playerOne);
                 break;
             }else{
                 System.out.println("Rolling again because you didn't roll a unique number!");
                 System.out.println();
-
             }
             System.out.println("Your total number of points is: " + playerOne.getScore());
             System.out.println();
         }
-
-
-
         if(playerOne.getScore() == timeGamePlayed){
             super.setPrize("60");
             int moneyPrize = Integer.parseInt(super.getPrize());
@@ -95,16 +88,12 @@ public class Craps extends Gamble{
         }else{
             System.out.println("Sorry you lost!");
         }
-
-
     }
-
 
     @Override
     public void resetGame()
     {
         super.playerOne = new Player();
-
     }
 
     @Override

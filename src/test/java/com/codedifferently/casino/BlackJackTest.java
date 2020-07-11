@@ -27,7 +27,7 @@ public class BlackJackTest {
         Game.playerTwo.setScore(13);
         bj.checkStandings();
         boolean expected = true;
-        boolean actual = bj.gameOver;
+        boolean actual = bj.isGameOver();
 
         Assert.assertEquals(expected, actual);
         bj.resetGame();
