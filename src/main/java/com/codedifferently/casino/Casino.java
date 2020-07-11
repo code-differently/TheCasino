@@ -68,10 +68,10 @@ public class Casino {
                 new WarGame().startGame();
                 mainMenu();
             case 2:
-                //new DiceGame().startGame();
+                new DiceGame().startGame();
                 mainMenu();
             case 3:
-                //new GoFish().startGame();
+                new GoFish().startGame();
                 mainMenu();
             case 4:
                 new Craps().startGame();

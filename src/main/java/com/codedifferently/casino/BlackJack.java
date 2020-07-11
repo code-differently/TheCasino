@@ -50,19 +50,14 @@ public class BlackJack extends Gamble {
         if (gameOver) {
             resetGame();
         }
-
-
-
-
     }
-
+  
     @Override
     public void resetGame() {
         playerOne = new Player();
         playerTwo = new Player();
         gameOver = false;
     }
-
 
     @Override
     public void tieMessage() {
@@ -112,7 +107,6 @@ public class BlackJack extends Gamble {
             drawCard(deck, playerOne);
             drawCard(deck, playerTwo);
         }
-
     }
 
     // method to draw a card
