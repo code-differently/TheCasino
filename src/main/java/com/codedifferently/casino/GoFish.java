@@ -8,7 +8,8 @@ public class GoFish extends Game {
     //track each individual card value i.e. 1, 2, 3, 4, etc. and its number of occurences in the hand
     private HashMap<Player, HashMap<Integer, ArrayList<Card>>> playerHands;
     private Deck deck;
-    private boolean playerOneTurn;
+    private boolean playerOneTurn = true;
+    ;
 
     public GoFish() {
         playerHands = new HashMap<Player, HashMap<Integer, ArrayList<Card>>>();
@@ -53,7 +54,7 @@ public class GoFish extends Game {
         System.out.println("The game will end when the deck is out of cards.");
         System.out.println("Let's start playing!");
 
-        //need to have at most 2 card left
+        //go until there are no cards left!
         while(deck.getNumCards() != 0) {
             //notice how I switch who is the asker and who is the answerer
             //the two values at the end are for testing purposes, giving a controlled value and indicating whether its for the test or not
@@ -63,17 +64,10 @@ public class GoFish extends Game {
             else {
                 initiateTradeSequence(playerTwo, playerOne,0, false);
             }
-            this.setPlayerOneTurn(!this.playerOneTurn);
-
-            //if you can trade, then update score variable inside of Player
-            //******************************
-            //debug
-            //System.out.println();
-            //System.out.println(" The size of the deck is:" + deck.getNumCards());
         }
 
         System.out.println();
-        System.out.println("All right, time to see the final score...");
+        System.out.println("Since the deck is out of cards, time to see the final score...");
         System.out.println();
 
         checkStandings();
@@ -87,10 +81,7 @@ public class GoFish extends Game {
         return this.deck;
     }
 
-    /**
-     *
-     * @return the boolean value of whether it is player one's turn or not
-     */
+    //checks whether it is player one's turn or not
     public boolean getPlayerOneTurn() {
         return this.playerOneTurn;
     }
@@ -151,9 +142,12 @@ public class GoFish extends Game {
             playerHands.get(asker).get(randomGuess).addAll(cardsToExchange);
             playerHands.get(answerer).get(randomGuess).removeAll(cardsToExchange);
             asker.setScore(asker.getScore() + 1);
-            System.out.println("Great job " + asker.getName() + ". Your score is now: " + asker.getScore());
+            System.out.println("Great job " + asker.getName() + "! Your score is now: " + asker.getScore());
         }
         else {
+            System.out.println("Unfortunately " + asker.getName() + ", you'll have to go fish.");
+            //the other player can go
+            this.setPlayerOneTurn(!this.playerOneTurn);
             goFish(asker);
         }
     }

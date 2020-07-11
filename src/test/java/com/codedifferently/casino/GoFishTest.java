@@ -19,7 +19,6 @@ public class GoFishTest {
     public void initialize() {
         goFish = new GoFish();
 
-        //need to give Bowser the same treatment as the other players
         player = new Player("Bowser", 0.0, 0, new ArrayList<Card>());
         playerTwo = new Player("Peach", 0.0, 0, new ArrayList<Card>());
         goFish.getPlayerHands().put(player, new HashMap<Integer, ArrayList<Card>>());
