@@ -42,7 +42,6 @@ public class BlackJack extends Gamble {
         checkStandings();
         while (!gameOver) {
             // checks hands to see if anybody has won
-            checkStandings();
             System.out.println(playerOne.getName() + " what you tryna do playa?");
             // lets user decide to draw or to stay
             displayOptions();
