@@ -1,118 +1,151 @@
 package com.codedifferently.casino;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+import java.util.ArrayList;
 
 public class PlayerTest {
-    Player p1;
+    Player defaultPlayer;
+
+    @Before
+    public void initialize() {
+        defaultPlayer = new Player();
+    }
 
     @Test
     public void constructorDefaultTest() {
-        p1 = new Player();
+        String expectedString = "Players name is: Unknown Name, Players money is: 0.0, Players score is: 0, Players cards are: No cards available at this time. Add a card to show the suit and value of each individual card";
 
-        String expectedName = "Unknown Name";
-        double expectedMoney = 0.00;
-        boolean expectedHasWon = false;
-        String actualName = p1.getName();
-        double actualMoney = p1.getMoney();
+        String actualString = defaultPlayer.toString();
 
-        Assert.assertEquals(expectedName, actualName);
-        Assert.assertEquals(expectedMoney, actualMoney, 0.001);
+        Assert.assertEquals(expectedString, actualString);
     }
 
-    @Test
-    public void constructorOnlyNameTest() {
-        String name = "Bobby Buckets";
-        p1 = new Player(name);
-
-        String expectedName = name;
-        double expectedMoney = 0.00;
-        boolean expectedHasWon = false;
-        String actualName = p1.getName();
-        double actualMoney = p1.getMoney();
-
-        Assert.assertEquals(expectedName, actualName);
-        Assert.assertEquals(expectedMoney, actualMoney, 0.00);
-    }
 
     @Test
-    public void constructorOnlyMoneyTest() {
-        double money = 502.50;
-        p1 = new Player(money);
+    public void constructorFourArgsTest() {
+        //need to have this to pass in an arrayList of cards
+        String expectedValue = "Players name is: Bobby Buckets, Players money is: 502.5, Players score is: 25, Players cards are: NINE of HEARTS ";
+        ArrayList<Card> cards = new ArrayList<Card>();
+        cards.add(new Card(Suit.HEARTS, Value.NINE));
 
-        String expectedName = "Unknown Name";
-        double expectedMoney = money;
-        boolean expectedHasWon = false;
-        String actualName = p1.getName();
-        double actualMoney = p1.getMoney();
+        // will only use this once, so declared it here instead of at before
+        Player p2 = new Player("Bobby Buckets", 502.5, 25, cards);
+        String actualValue = p2.toString();
 
-        Assert.assertEquals(expectedName, actualName);
-        Assert.assertEquals(expectedMoney, actualMoney, 0.00);
-    }
-
-    @Test
-    public void constructorAllArgsTest() {
-        String name = "Bobby Buckets";
-        double money = 502.50;
-        p1 = new Player(name, money);
-
-        String expectedName = name;
-        double expectedMoney = money;
-        boolean expectedHasWon = false;
-        String actualName = p1.getName();
-        double actualMoney = p1.getMoney();
-
-        Assert.assertEquals(expectedName, actualName);
-        Assert.assertEquals(expectedMoney, actualMoney, 0.00);
+        Assert.assertEquals(expectedValue, actualValue);
     }
 
     @Test
     public void getNameTest() {
-        String name = "Curry";
-        p1 = new Player(name);
+        String expectedName = "Unknown Name";
 
-        String expectedName = name ;
-        String actualName = p1.getName();
+        String actualName = defaultPlayer.getName();
 
         Assert.assertEquals(expectedName, actualName);
     }
 
     @Test
     public void getMoneyTest() {
-        double money = 50.25;
-        p1 = new Player(money);
+        double expectedMoney = 0.0;
 
-        double expectedMoney = money ;
-        double actualMoney = p1.getMoney();
+        double actualMoney = defaultPlayer.getMoney();
 
-        Assert.assertEquals(expectedMoney, actualMoney, 0.00);
+        Assert.assertEquals(expectedMoney, actualMoney, 0.0);
     }
 
+    @Test
+    public void getScoreTest() {
+        int expectedScore = 0;
 
+        int actualScore = defaultPlayer.getScore();
 
+        Assert.assertEquals(expectedScore, actualScore, 0.0);
+    }
+
+    @Test
+    public void getCardsTest() {
+        int expectedSize = 0;
+
+        int actualSize = defaultPlayer.getCards().size();
+
+        Assert.assertEquals(expectedSize, actualSize);
+    }
 
     @Test
     public void setNameTest() {
-        String name = "Curry";
-        p1 = new Player();
+        String expectedName = "Curry";
 
-        String expectedName = name ;
-        p1.setName("Curry");
-        String actualName = p1.getName();
+        defaultPlayer.setName("Curry");
+        String actualName = defaultPlayer.getName();
 
         Assert.assertEquals(expectedName, actualName);
     }
 
     @Test
     public void setMoneyTest() {
-        double money = 50.25;
-        p1 = new Player();
+        double expectedMoney = 50.25;
 
-        double expectedMoney = money ;
-        p1.setMoney(money);
-        double actualMoney = p1.getMoney();
+        defaultPlayer.setMoney(50.25);
+        double actualMoney = defaultPlayer.getMoney();
 
-        Assert.assertEquals(expectedMoney, actualMoney, 0.00);
+        Assert.assertEquals(expectedMoney, actualMoney, 0.0);
+    }
+
+    @Test
+    public void setScoreTest() {
+        double expectedScore = 45;
+
+        defaultPlayer.setScore(45);
+        int actualScore = defaultPlayer.getScore();
+
+        Assert.assertEquals(expectedScore, actualScore, 0.0);
+    }
+
+    @Test
+    public void setCardsTest() {
+        String expectedCardValue = "FIVE of DIAMONDS ";
+        ArrayList<Card> cards = new ArrayList<Card>();
+        cards.add(new Card(Suit.DIAMONDS, Value.FIVE));
+
+        defaultPlayer.setCards(cards);
+        String actualCardValue = defaultPlayer.printOutCards();
+
+
+        Assert.assertEquals(expectedCardValue, actualCardValue);
+    }
+
+    @Test
+    public void setOneCardTest() {
+        String expectedCardValue = "FIVE of DIAMONDS ";
+        Card card = new Card(Suit.DIAMONDS, Value.FIVE);
+
+        defaultPlayer.setOneCard(card);
+        String actualCardValue = defaultPlayer.printOutCards();
+
+        Assert.assertEquals(expectedCardValue, actualCardValue);
+    }
+
+    @Test
+    public void toStringTest() {
+        String expectedString = "Players name is: Unknown Name, Players money is: 0.0, Players score is: 0, Players cards are: No cards available at this time. Add a card to show the suit and value of each individual card";
+
+        String actualString = defaultPlayer.toString();
+
+        Assert.assertEquals(expectedString, actualString);
+    }
+
+    @Test
+    public void printOutCardsTest() {
+        ArrayList<Card> cards = new ArrayList<Card>();
+        cards.add(new Card(Suit.CLUBS, Value.SEVEN));
+        defaultPlayer = new Player("Bob", 12.5, 45, cards);
+
+        String expected = "SEVEN of CLUBS ";
+        String actual = defaultPlayer.printOutCards();
+
+        Assert.assertEquals(expected, actual);
     }
 
 }

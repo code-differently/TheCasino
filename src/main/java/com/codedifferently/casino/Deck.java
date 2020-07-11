@@ -16,14 +16,40 @@ public class Deck {
         deck.add(x);
     }
 
-    public void removeCard() {
+    //deals a random card
+    public Card dealRandomCard() {
         Random rand = new Random();
         int n = rand.nextInt(deck.size());
         //doesn't need to be set to a variable
-        deck.remove(n);
+        return deck.remove(n);
     }
 
-    public ArrayList<Card> generateDeck(int numberOfCardsInDeck)
+    public Card dealSpecificCard(Card card) {
+        //gets the index of the card and returns it
+        return deck.remove(deck.indexOf(card));
+    }
+
+    public ArrayList<Card> dealMultipleCards(int numCards) {
+        ArrayList<Card> removedCards = new ArrayList<Card>();
+        if(numCards > this.getDeck().size()) {
+
+        }
+        Random rand = new Random();
+        for(int i = 0; i < numCards; i++) {
+            int n = rand.nextInt(deck.size());
+            //doesn't need to be set to a variable
+            Card cardToBeDistributed = deck.remove(n);
+            removedCards.add(cardToBeDistributed);
+        }
+        return removedCards;
+    }
+
+    /**
+     *
+     * @param numberOfCardsInDeck
+     * the deck is initialized to a specific number of cards
+     */
+    public void generateSpecificSizedDeck(int numberOfCardsInDeck)
     {
         Value[] cardNumbers =
                 {
@@ -51,9 +77,9 @@ public class Deck {
                 };
         ArrayList<Card> allCards = new ArrayList<Card>();
 
-        for(int i = 0; i <= 12; i++)
+        for(int i = 0; i < cardNumbers.length; i++)
         {
-            for(int j = 0; j <= 3; j++)
+            for(int j = 0; j < cardFaces.length; j++)
             {
                 allCards.add(new Card(cardFaces[j], cardNumbers[i]));
             }
@@ -64,13 +90,6 @@ public class Deck {
             int r = (int) (Math.random() * (52 - 1));
             deck.add(allCards.get(r));
         }
-
-        return deck;
-    }
-
-    public Card removeCard(Card card) {
-        //gets the index of the card and returns it
-        return deck.remove(deck.indexOf(card));
     }
 
     public void shuffle(){

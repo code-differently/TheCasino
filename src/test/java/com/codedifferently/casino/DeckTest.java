@@ -14,7 +14,7 @@ public class DeckTest {
     @Before
     public void initialize() {
         testDeck = new Deck();
-        testCard = new Card();
+        testCard = new Card(Suit.DIAMONDS, Value.JACK);
     }
 
     @Test
@@ -38,38 +38,59 @@ public class DeckTest {
 
         // Then
         Assert.assertEquals("This is addCardTest", expected, actual);
-
     }
 
     @Test
-    public void removeCardRandomlyTest(){
+    public void dealRandomCardTest() {
+        testDeck.addCard(new Card(Suit.DIAMONDS, Value.JACK));
+
+        Card actualCard = testDeck.dealRandomCard();
+        Assert.assertEquals("deal random card test", testCard.toString(), actualCard.toString());
+    }
+
+    @Test
+    public void dealSpecifiedCardTest(){
 
         // Given
         testDeck.addCard(testCard);
-        int expected = 0;
 
         // When
-        testDeck.removeCard();
-        int actual = testDeck.getNumCards();
+        Card actualCard = testDeck.dealSpecificCard(testCard);
 
         // Then
-        Assert.assertEquals("This is removeCardTest", expected, actual);
+        Assert.assertEquals("This is dealSpecificCardTest", testCard.toString(), actualCard.toString());
     }
 
     @Test
-    public void removeSpecificCardTest(){
+    public void dealMultipleCardTest(){
 
         // Given
-        Card expectedCard = new Card(Suit.HEARTS, Value.EIGHT);
-        String expectedString = expectedCard.toString();
+        ArrayList<Card> cardCheck = new ArrayList<Card>();
+        Card oneOfSpades = new Card(Suit.SPADES, Value.ONE);
+        cardCheck.add(testCard);
+        cardCheck.add(oneOfSpades);
+
+        testDeck.addCard(testCard);
+        testDeck.addCard(oneOfSpades);
 
         // When
-        testDeck.addCard(expectedCard);
-        Card actualCard = testDeck.removeCard(expectedCard);
-        String actualString = actualCard.toString();
+        //its random so sometimes the order will not be the same
+        ArrayList<Card> actualCards = testDeck.dealMultipleCards(2);
 
         // Then
-        Assert.assertEquals("This is removeCardTest", expectedString, actualString);
+        for(int i = 0; i < actualCards.size(); i++) {
+            Assert.assertEquals(cardCheck.get(i).toString(), actualCards.get(i).toString());
+        }
+    }
+
+    @Test
+    public void generateSpecificSizedDeckTest() {
+        int expectedSize = 3;
+
+        testDeck.generateSpecificSizedDeck(3);
+        int actualSize = testDeck.getNumCards();
+
+        Assert.assertEquals(expectedSize, actualSize);
     }
 
     @Test
@@ -91,16 +112,11 @@ public class DeckTest {
     }
 
     @Test
-    public void correctDeckGenerator()
-    {
-        Deck d = new Deck();
-        int correctSize = 3;
+    public void getNumCardsTest() {
+        int expected = 0;
 
-        ArrayList<Card> cards = d.generateDeck(3);
+        int actual = testDeck.getNumCards();
 
-        int realSize = cards.size();
-
-        Assert.assertEquals(correctSize, realSize);
+        Assert.assertEquals(expected, actual);
     }
-
 }
