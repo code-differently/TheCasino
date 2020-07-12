@@ -37,7 +37,11 @@ public class Deck {
         Random rand = new Random();
         for(int i = 0; i < numCards; i++) {
             int n = rand.nextInt(deck.size());
+
             //doesn't need to be set to a variable
+
+            //doesn't need to be set to a variable
+
             Card cardToBeDistributed = deck.remove(n);
             removedCards.add(cardToBeDistributed);
         }
@@ -89,6 +93,53 @@ public class Deck {
         {
             int r = (int) (Math.random() * (52 - 1));
             deck.add(allCards.get(r));
+        }
+
+    }
+
+    /**
+     *
+     * @param numberOfCardsInDeck
+     * the deck is initialized to a specific number of cards
+     */
+    public void generateNonRandomizedSpecificSizedDeck(int numberOfCardsInDeck)
+    {
+        Value[] cardNumbers =
+                {
+                        Value.ONE,
+                        Value.TWO,
+                        Value.THREE,
+                        Value.FOUR,
+                        Value.FIVE,
+                        Value.SIX,
+                        Value.SEVEN,
+                        Value.EIGHT,
+                        Value.NINE,
+                        Value.TEN,
+                        Value.JACK,
+                        Value.QUEEN,
+                        Value.KING,
+                        Value.ACE
+                };
+        Suit[] cardFaces =
+                {
+                        Suit.SPADES,
+                        Suit.HEARTS,
+                        Suit.DIAMONDS,
+                        Suit.CLUBS
+                };
+        ArrayList<Card> allCards = new ArrayList<Card>();
+
+        for(int i = 0; i < cardNumbers.length; i++)
+        {
+            for(int j = 0; j < cardFaces.length; j++)
+            {
+                allCards.add(new Card(cardFaces[j], cardNumbers[i]));
+            }
+        }
+        for(int i = 0; i < numberOfCardsInDeck; i++)
+        {
+            deck.add(allCards.get(i));
         }
     }
 

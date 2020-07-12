@@ -15,7 +15,7 @@ public class DiceGame extends Game
         userGuess = scan.nextInt();
 
         //a six sided dice
-        Die d = new Die(6);
+        Die d = new Die();
         correctRole = d.rollDice();
 
         checkStandings();
@@ -33,12 +33,13 @@ public class DiceGame extends Game
     public void checkStandings() {
         if(userGuess != correctRole)
         {
-            System.out.println("Awwww, sorry! Your guess was " + (correctRole - userGuess) + " away from the correct role of " + correctRole);
+            System.out.println("Awwww, sorry! Your guess was " + Math.abs(correctRole - userGuess) + " away from the correct role of " + correctRole);
         }
         else
         {
             System.out.println("Ayeee, you guessed the correct role! Good job");
         }
+        System.out.println();
     }
 
     public static void main(String[] args) {

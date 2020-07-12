@@ -1,3 +1,4 @@
+
 package com.codedifferently.casino;
 
 public abstract class Gamble extends Game
@@ -30,3 +31,4 @@ public abstract class Gamble extends Game
         this.prize = prize;
     }
 }
+
