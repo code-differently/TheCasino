@@ -13,8 +13,8 @@ public class GoFish extends Game {
 
     public GoFish() {
         playerHands = new HashMap<Player, HashMap<Integer, ArrayList<Card>>>();
-        super.playerOne = new Player("Timon", 0.0, 0, new ArrayList<Card>());
-        super.playerTwo = new Player("Pumba", 0.0, 0, new ArrayList<Card>());
+        super.playerOne = new Player("user will enter", 0.0, 0, new ArrayList<Card>());
+        super.playerTwo = new Player("East Side", 0.0, 0, new ArrayList<Card>());
         //need to put these there, otherwise it will be referencing null which isn't good
         playerHands.put(super.playerOne, new HashMap<Integer, ArrayList<Card>>());
         playerHands.put(super.playerTwo, new HashMap<Integer, ArrayList<Card>>());
@@ -32,10 +32,14 @@ public class GoFish extends Game {
     }
 
     public void startGame() {
+        //keeps track if its the first time entering the while loop or not
+        int count = 0;
+        //initializing this here to have it accessible to the rest of the method
+        //used to get the integer value or quit
+        String userChoice = "";
         //it's 56 because we have an enum for 1 and an enum for Ace, making it 14 * 4, not 13 * 4
         this.deck.generateNonRandomizedSpecificSizedDeck(56);
 
-        System.out.println("Welcome to Go Fish! Each player will get 7 cards");
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please enter your name: ");
 
@@ -56,15 +60,38 @@ public class GoFish extends Game {
             }
         }
 
-        System.out.println("The game will end when the deck is out of cards.");
-        System.out.println("Let's start playing!");
+        System.out.println("Welcome to Go Fish " + playerOne.getName() + "! Each player will get 7 cards");
+        System.out.println("The game will end when the deck is out of cards (The deck at this moment has " + this.deck.getNumCards() + " cards).");
+        System.out.println("A twist to this version is that you get points if you guess a card value correctly, and the other player gets a point if you guess incorectly.");
+        System.out.println("If you guess correctly, then you'll get to go again, but beware " + playerTwo.getName() + " can do the same thing!");
+        System.out.println("The goal is to get the most number of points by the time the deck runs out of cards. If you quit, then you are assessed based off of what score you had before ending.");
+        System.out.println("And of course, you'll have to go fish if you guess incorrectly. Good luck!");
+
+        System.out.println(printOutCardValues(playerOne));
 
         //go until there are no cards left!
         while(deck.getNumCards() != 0) {
-            //notice how I switch who is the asker and who is the answerer
-            //the two values at the end are for testing purposes, giving a controlled value and indicating whether its for the test or not
             if(playerOneTurn) {
-                initiateTradeSequence(playerOne, playerTwo, 0, false);
+                if(count > 0) {
+                    System.out.println(printOutCardValues(playerOne));
+                }
+                count++;
+                System.out.println();
+                System.out.println("Now that you know which cards you have, which card value would you like to ask for? Please enter an int between 0 and 13, inclusive");
+                System.out.println("You can quit as well if you want. Just type in 'quit'");
+                userChoice = scanner.next().toLowerCase().trim();
+                if(userChoice.equals("quit")) {
+                    checkStandings();
+                    break;
+                }
+                int guess = Integer.parseInt(userChoice);
+                if(guess < 0 || guess > 13) {
+                    System.out.println("Invalid Input, please enter a number between 0 and 13 next time. Setting guess to 6");
+                    guess = 6;
+                }
+                //notice how I switch who is the asker and who is the answerer
+                //the two values at the end are for testing purposes, giving a controlled value and indicating whether its for the test or not
+                initiateTradeSequence(playerOne, playerTwo, guess, false);
             }
             else {
                 initiateTradeSequence(playerTwo, playerOne,0, false);
@@ -75,11 +102,15 @@ public class GoFish extends Game {
             }
         }
 
-        System.out.println();
-        System.out.println("Since the deck is out of cards, it's time to see the final score...");
-        System.out.println();
+        //only print this if user enters quit
+        if(!userChoice.equals("quit")) {
+            System.out.println();
+            System.out.println("Since the deck is out of cards, it's time to see the final score...");
+            System.out.println();
 
-        checkStandings();
+            checkStandings();
+        }
+
     }
 
     public HashMap<Player, HashMap<Integer, ArrayList<Card>>> getPlayerHands() {
@@ -148,28 +179,37 @@ public class GoFish extends Game {
             //gets all of the cards for the player
             ArrayList<Card> cardsToExchange = playerHands.get(answerer).get(randomGuess);
             //using add all and remove all instead of a for each loop because of concurrency issues
-            playerHands.get(asker).get(randomGuess).addAll(cardsToExchange);
+            //playerHands.get(asker).get(randomGuess).addAll(cardsToExchange);
+            //just remove the cards, its faster in the long run
             playerHands.get(answerer).get(randomGuess).removeAll(cardsToExchange);
             asker.setScore(asker.getScore() + 1);
             System.out.println("Great job " + asker.getName() + "! Your score is now: " + asker.getScore());
         }
         else {
-            System.out.println("Unfortunately " + asker.getName() + ", you'll have to go fish.");
+            answerer.setScore(answerer.getScore() + 1);
+            System.out.println("Unfortunately " + asker.getName() + ", you'll have to go fish. And " + answerer.getName() + " now has " + answerer.getScore() + " point because you guessed incorrectly.");
             //the other player can go
             this.setPlayerOneTurn(!this.playerOneTurn);
             goFish(asker);
         }
     }
 
-//    public String printOutCards(Player player) {
-//        //goes from 0 to 13
-//        for(int whichValue = 1; whichValue < 14; whichValue++) {
-//            for(Card card: this.getPlayerHands().get(player).get(whichValue)) {
-//
-//            }
-//        }
-//
-//    }
+    public String printOutCardValues(Player player) {
+        System.out.println();
+        System.out.println("Here are your card values " + player.getName() + ":");
+        System.out.println();
+
+        StringBuilder str = new StringBuilder();
+        //goes from 0 to 13
+        for(int whichValue = 0; whichValue < 14; whichValue++) {
+            //only does the this for loop if the player has cards at that value
+            if(doesPlayerHaveCardAtValue(player, whichValue)) {
+                //use size because it's an arrayList of cards
+                str.append("You have " + this.getPlayerHands().get(player).get(whichValue).size() + " cards of value " + whichValue + "\n");
+            }
+        }
+        return str.toString().trim();
+    }
 
     public void resetGame() {
         super.playerOne = new Player();
@@ -177,7 +217,7 @@ public class GoFish extends Game {
     }
 
     public void tieMessage() {
-        System.out.println("ya'll tied, Try again later");
+        System.out.println("Ya'll tied, Play again and try to win!");
     }
 
     public void checkStandings() {

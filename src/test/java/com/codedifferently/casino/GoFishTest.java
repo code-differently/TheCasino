@@ -164,4 +164,17 @@ public class GoFishTest {
         Assert.assertTrue("checking to see whether the second player's score stays the same",playerTwo.getScore() == 0);
         Assert.assertTrue("check to see that the deck is set to a size of 2, initially had it at 3",goFish.getDeck().getNumCards() == 2);
     }
+
+    @Test
+    public void printOutCardsTest() {
+        String expected = "You have 1 cards of value 1";
+        Card card = new Card(Suit.SPADES, Value.ONE);
+        int value = card.getValue().getValue();
+        goFish.getPlayerHands().get(player).get(value).add(card);
+
+        String actual = goFish.printOutCardValues(player);
+
+        Assert.assertEquals(expected, actual);
+
+    }
 }
