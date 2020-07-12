@@ -80,7 +80,7 @@ public class Casino {
                 new BlackJack().startGame();
                 mainMenu();
             case 6:
-                //new GuessGame().startGame();
+                new GuessCard().startGame();
                 mainMenu();
             case 7:
                 System.exit(0);
