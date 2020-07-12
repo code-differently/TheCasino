@@ -5,23 +5,32 @@ import java.util.Scanner;
 
 public class BlackJack extends Gamble {
     // declared variables
-    private final int MAX_SCORE = 21;
-    private Deck gameDeck = new Deck();
-    private Scanner objScanner = new Scanner(System.in);
+    private final int MAX_SCORE;
+    private Deck gameDeck;
+    private Scanner objScanner;
     private int input;
     private double moneyWaged;
-    private boolean gameOver = false;
+    private boolean gameOver;
+
+    public BlackJack(String yourName) {
+        this.MAX_SCORE = 21;
+        this.gameDeck = new Deck();
+        this.objScanner = new Scanner(System.in);
+        this.input = 0;
+        this.moneyWaged = 0.0;
+        this.gameOver = false;
+        // created a player and a dealer
+        playerOne = new Player(yourName, 1200, 0, new ArrayList<>());
+        playerTwo = new Player("Dealer", 0, 0, new ArrayList<>());
+    }
 
     public static void main(String[] args)
     {
-        new BlackJack().startGame();
+        new BlackJack("WWE").startGame();
     }
 
     // game logic
     public void startGame() {
-        // created two players and a dealer
-        playerOne = new Player("Nino Brown", 1200, 0, new ArrayList<>());
-        playerTwo = new Player("Dealer", 0, 0, new ArrayList<>());
         // generating and shuffling deck
         createRealDeck(gameDeck);
         gameDeck.shuffle();

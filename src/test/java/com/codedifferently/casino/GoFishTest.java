@@ -17,7 +17,7 @@ public class GoFishTest {
 
     @Before
     public void initialize() {
-        goFish = new GoFish();
+        goFish = new GoFish("donatello", "raphael");
 
         player = new Player("Bowser", 0.0, 0, new ArrayList<Card>());
         playerTwo = new Player("Peach", 0.0, 0, new ArrayList<Card>());
@@ -129,16 +129,16 @@ public class GoFishTest {
         goFish.getPlayerHands().get(player).get(valueToTest).add(card1);
         goFish.getPlayerHands().get(playerTwo).get(valueToTest).add(card2);
 
-        //player is the asker, playerTwo is the answerer, at the end player should have two cards and playerTwo should only have one card
+        //player is the asker, playerTwo is the answerer, at the end player should have one cards and playerTwo should only have zero cards
         goFish.initiateTradeSequence(player, playerTwo, valueToTest, true);
 
-        Assert.assertTrue("checking to see whether the player gets two cards", goFish.getPlayerHands().get(player).get(valueToTest).size() == 2);
+        Assert.assertTrue("checking to see whether the player gets two cards", goFish.getPlayerHands().get(player).get(valueToTest).size() == 1);
         Assert.assertTrue("checking to see whether playerTwo has zero cards",goFish.getPlayerHands().get(playerTwo).get(valueToTest).size() == 0);
         Assert.assertTrue("checking to see whether player's score increases by one",player.getScore() == 1);
     }
 
     @Test
-    public void initiateTradeSequenceGoFishTest() {
+    public void initiateTradeSequenceFailGoFishTest() {
         //adding cards with the different value and different suits so that the players do not exchange cards
         Card card1 = new Card(Suit.SPADES, Value.ACE);
         Card card2 = new Card(Suit.HEARTS, Value.KING);
@@ -149,10 +149,10 @@ public class GoFishTest {
         goFish.getPlayerHands().get(playerTwo).get(value2).add(card2);
         goFish.getDeck().generateNonRandomizedSpecificSizedDeck(3);
 
-        //player is the asker, playerTwo is the answerer, at the end both players should have only 1 card because peach (player2) does not have the specified card value
+        //player is the asker, playerTwo is the answerer, at the player1 will have two cards and player2 will only have one card since player2 does not have the specified card value
         goFish.initiateTradeSequence(player, playerTwo, value1, true);
 
-        //player1 should have one more card then player2, but the scores should still be 0
+        //player1 should have one more card then player2 (because player1 has to go fish), and the score for player 2 should be 1
         boolean hasMoreThanOneCard = false;
         for(int i = 0; i < 14; i++) {
             if(i != value1 || (i == value1 && goFish.getPlayerHands().get(player).get(i).size() > 1)) {
@@ -161,7 +161,7 @@ public class GoFishTest {
         }
         Assert.assertTrue("checking to see whether the player has more than one card", hasMoreThanOneCard);
         Assert.assertTrue("checking to see whether the first player's score stays the same",player.getScore() == 0);
-        Assert.assertTrue("checking to see whether the second player's score stays the same",playerTwo.getScore() == 0);
+        Assert.assertTrue("checking to see whether the second player's goes up",playerTwo.getScore() == 1);
         Assert.assertTrue("check to see that the deck is set to a size of 2, initially had it at 3",goFish.getDeck().getNumCards() == 2);
     }
 
@@ -175,6 +175,11 @@ public class GoFishTest {
         String actual = goFish.printOutCardValues(player);
 
         Assert.assertEquals(expected, actual);
+    }
 
+    @Test
+    public void errorCheckTest() {
+        int returnedGuess = goFish.changeInputError(45);
+        Assert.assertTrue(returnedGuess >= 0 && returnedGuess < 14);
     }
 }

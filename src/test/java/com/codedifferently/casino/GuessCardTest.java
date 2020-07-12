@@ -7,10 +7,10 @@ import org.junit.Test;
 public class GuessCardTest {
 
     @Test
-    public void CheckStandingTest1() {
+    public void CheckStandingTestTooLow() {
 
         // Given
-        GuessCard test = new GuessCard();
+        GuessCard test = new GuessCard("Bowser");
         test.getRandCardVal();
         test.setGuess(test.getRandCardVal() - 1);
         String expected = "Your guess was too low: Guess a number higher than " + test.getGuess();
@@ -24,10 +24,10 @@ public class GuessCardTest {
     }
 
     @Test
-    public void CheckStandingTest2() {
+    public void CheckStandingTestTooHigh() {
 
         // Given
-        GuessCard test = new GuessCard();
+        GuessCard test = new GuessCard("Bowser");
         test.getRandCardVal();
         test.setGuess(test.getRandCardVal() + 1);
         String expected = "Your guess was too high: Guess a number lower than " + test.getGuess();
@@ -41,13 +41,13 @@ public class GuessCardTest {
     }
 
     @Test
-    public void CheckStandingTest3() {
+    public void CheckStandingTestJustRight() {
 
         // Given
-        GuessCard test = new GuessCard();
+        GuessCard test = new GuessCard("Bowser");
         test.getRandCardVal();
         test.setGuess(test.getRandCardVal());
-        String expected = "Wow! Mom great job, you've won the game with a score of 1";
+        String expected = "Wow! "+ test.playerOne.getName() + " great job, you've won the game with a score of 1";
 
         // When
         test.checkStandings();
@@ -56,26 +56,4 @@ public class GuessCardTest {
         // Then
         Assert.assertEquals(expected, actual);
     }
-
-    @Test
-    public void CheckStandingTest4() {
-
-        // Given
-        GuessCard test = new GuessCard();
-        test.getRandCardVal();
-        test.setCount(5);
-        test.setGuess(test.getRandCardVal()+1);
-        String expected = "Dang, Mom you lost, with a score of 0. But guess what, you'll get em next time!";
-
-        // When
-        test.checkStandings();
-        String actual = test.getMessage();
-
-        // Then
-        Assert.assertEquals(expected, actual);
-    }
-
-
-
-
 }

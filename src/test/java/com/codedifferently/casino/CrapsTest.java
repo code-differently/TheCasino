@@ -1,15 +1,18 @@
 package com.codedifferently.casino;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class CrapsTest {
+    Craps craps;
+    @Before
+    public void initialize() {
+        craps = new Craps("Angelina");
+    }
 
     @Test
     public void setMinBet(){
-        Craps craps= new Craps();
-        //Given
-
         //Then
         craps.setMinBet(5);
 
@@ -19,9 +22,6 @@ public class CrapsTest {
   
     @Test
     public void getMinBet(){
-        //Given
-        Craps craps= new Craps();
-
         //Then
         craps.setMinBet(5);
 
@@ -31,9 +31,6 @@ public class CrapsTest {
 
     @Test
     public void setMaxBet(){
-        Craps craps= new Craps();
-        //Given
-
         //Then
         craps.setMaxBet(5000);
 
@@ -43,9 +40,6 @@ public class CrapsTest {
   
     @Test
     public void getMaxBet(){
-        //Given
-        Craps craps= new Craps();
-
         //Then
         craps.setMaxBet(5000);
 
@@ -55,9 +49,6 @@ public class CrapsTest {
     }
     @Test
     public void rollMultipleDiceTest() {
-        //Given
-        Craps craps = new Craps();
-
         //when
         int value = craps.rollMultipleDice();
 

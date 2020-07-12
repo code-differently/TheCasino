@@ -8,7 +8,6 @@ public abstract class Game
     public abstract void startGame();
     public abstract void resetGame();
 
-
     public String losingMessage(Player p)
     {
         return "Dang, " + p.getName() + " you lost, with a score of " + p.getScore() + ". But guess what, you'll get em next time!";

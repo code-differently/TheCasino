@@ -11,10 +11,14 @@ public class GoFish extends Game {
     private Deck deck;
     private boolean playerOneTurn = true;
 
-    public GoFish() {
+    public static void main(String [] args) {
+        new GoFish("bob", "paul").startGame();
+    }
+
+    public GoFish(String playerName, String opponentName) {
         playerHands = new HashMap<Player, HashMap<Integer, ArrayList<Card>>>();
-        super.playerOne = new Player("user will enter", 0.0, 0, new ArrayList<Card>());
-        super.playerTwo = new Player("East Side", 0.0, 0, new ArrayList<Card>());
+        super.playerOne = new Player(playerName, 0.0, 0, new ArrayList<Card>());
+        super.playerTwo = new Player(opponentName, 0.0, 0, new ArrayList<Card>());
         //need to put these there, otherwise it will be referencing null which isn't good
         playerHands.put(super.playerOne, new HashMap<Integer, ArrayList<Card>>());
         playerHands.put(super.playerTwo, new HashMap<Integer, ArrayList<Card>>());
@@ -27,10 +31,6 @@ public class GoFish extends Game {
         playerOneTurn = true;
     }
 
-    public static void main(String [] args) {
-        new GoFish().startGame();
-    }
-
     public void startGame() {
         //keeps track if its the first time entering the while loop or not
         int count = 0;
@@ -41,10 +41,10 @@ public class GoFish extends Game {
         this.deck.generateNonRandomizedSpecificSizedDeck(56);
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Please enter your name: ");
-
-        //scans until the next line, trims anything before and after
-        super.playerOne.setName(scanner.nextLine().trim());
+//        System.out.println("Please enter your name: ");
+//
+//        //scans until the next line, trims anything before and after
+//        super.playerOne.setName(scanner.nextLine().trim());
 
         //each player will get 7 cards
         for(int i = 0; i < 14; i++) {
@@ -86,8 +86,7 @@ public class GoFish extends Game {
                 }
                 int guess = Integer.parseInt(userChoice);
                 if(guess < 0 || guess > 13) {
-                    System.out.println("Invalid Input, please enter a number between 0 and 13 next time. Setting guess to 6");
-                    guess = 6;
+                    guess = changeInputError(guess);
                 }
                 //notice how I switch who is the asker and who is the answerer
                 //the two values at the end are for testing purposes, giving a controlled value and indicating whether its for the test or not
@@ -102,7 +101,7 @@ public class GoFish extends Game {
             }
         }
 
-        //only print this if user enters quit
+        //only print this if user does not enter quit
         if(!userChoice.equals("quit")) {
             System.out.println();
             System.out.println("Since the deck is out of cards, it's time to see the final score...");
@@ -110,7 +109,6 @@ public class GoFish extends Game {
 
             checkStandings();
         }
-
     }
 
     public HashMap<Player, HashMap<Integer, ArrayList<Card>>> getPlayerHands() {
@@ -209,6 +207,15 @@ public class GoFish extends Game {
             }
         }
         return str.toString().trim();
+    }
+
+    public int changeInputError(int guess) {
+        Random random = new Random();
+        int newGuessValue = 0;
+        //0 to 13
+        newGuessValue = random.nextInt(14);
+        System.out.println("Invalid Input, please enter a number between 0 and 13 next time. Setting guess to " + newGuessValue);
+        return newGuessValue;
     }
 
     public void resetGame() {

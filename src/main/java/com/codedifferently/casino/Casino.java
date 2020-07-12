@@ -2,13 +2,23 @@ package com.codedifferently.casino;
 
 import java.util.Scanner;
 
-public class Casino {
+public class Casino{
     int input;
-    Scanner objSC = new Scanner(System.in);
+    Scanner objSC;
+    String yourName;
+    String opponentsName;
+
+    public Casino() {
+        this.input = 0;
+        this.objSC = new Scanner(System.in);
+        this.yourName = "";
+        this.opponentsName = "";
+    }
 
     public static void main(String[] args) {
         Casino cas = new Casino();
         cas.titleBorder();
+        cas.askForNames();
         cas.mainMenu();
     }
 
@@ -43,6 +53,17 @@ public class Casino {
         System.out.println();
     }
 
+    public void askForNames() {
+        String askForPlayerName = "Please enter your name.";
+
+        System.out.println(askForPlayerName);
+        yourName = objSC.nextLine().trim();
+        String askForOpponentName = "Please enter your opponents name.";
+        System.out.println(askForOpponentName);
+        opponentsName = objSC.nextLine().trim();
+        System.out.println();
+    }
+
     // menu that is going to show all games
     public void mainMenu() {
         String menuMessage = "You are at the main menu for our casino";
@@ -65,24 +86,25 @@ public class Casino {
         String wrongChoice = "You have chosen a number not on the list of options below";
         switch (choice) {
             case 1:
-                new WarGame().startGame();
+                new WarGame(this.yourName, this.opponentsName).startGame();
                 mainMenu();
             case 2:
                 new DiceGame().startGame();
                 mainMenu();
             case 3:
-                new GoFish().startGame();
+                new GoFish(this.yourName, this.opponentsName).startGame();
                 mainMenu();
             case 4:
-                new Craps().startGame();
+                new Craps(this.yourName).startGame();
                 mainMenu();
             case 5:
-                new BlackJack().startGame();
+                new BlackJack(this.yourName).startGame();
                 mainMenu();
             case 6:
-                new GuessCard().startGame();
+                new GuessCard(this.yourName).startGame();
                 mainMenu();
             case 7:
+                objSC.close();
                 System.exit(0);
                 break;
             default:

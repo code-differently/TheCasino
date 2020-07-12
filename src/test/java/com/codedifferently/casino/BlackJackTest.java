@@ -1,12 +1,19 @@
 package com.codedifferently.casino;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import java.util.ArrayList;
 
 public class BlackJackTest {
-    BlackJack bj = new BlackJack();
-    Deck gameDeck = new Deck();
+    BlackJack bj;
+    Deck gameDeck;
+
+    @Before
+    public void instantiate() {
+        bj = new BlackJack("Bowser");
+        gameDeck = new Deck();
+    }
 
     @Test
     public void resetGameTest() {

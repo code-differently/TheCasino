@@ -8,22 +8,28 @@ import java.util.Scanner;
 public class WarGame extends Game
 {
     private Deck deck;
-    public WarGame() {
+
+    public WarGame(String yourName, String opponentsName) {
         deck = new Deck();
+        super.playerOne = new Player();
+        super.playerTwo = new Player();
+        super.playerOne.setName(yourName);
+        super.playerTwo.setName(opponentsName);
+        deck.generateSpecificSizedDeck(56);
+        super.playerOne.setCards(deck.dealMultipleCards(5));
+        super.playerTwo.setCards(deck.dealMultipleCards(5));
+    }
+
+    public static void main(String[] args) {
+        new WarGame("Pie", "Cookie").startGame();
     }
 
     public void startGame()
     {
         Scanner scan = new Scanner(System.in);
 
-        deck.generateSpecificSizedDeck(52);
         System.out.println("Welcome to the Card Game War!");
-        System.out.println("There are 2 players for this game. Player one enter your name");
-        super.playerOne = new Player(scan.nextLine(), 0.0, 1, deck.dealMultipleCards(5));
-        System.out.println("Player two enter your name");
-        super.playerTwo = new Player(scan.nextLine(), 0.0, 1, deck.dealMultipleCards(5));
 
-        //System.out.println("deck size:" + deck.getNumCards());
         int score1 = 0;
         int score2 = 0;
 
@@ -53,12 +59,14 @@ public class WarGame extends Game
         if(playerOneCardValue > playerTwoCardValue)
         {
             System.out.println("Nice! " + super.playerOne.getName() + " you won this round.");
-            super.playerOne.setScore(score1++);
+            //increment score first, then add it
+            super.playerOne.setScore(++score1);
         }
         if(playerOneCardValue < playerTwoCardValue)
         {
             System.out.println("Nice! " + super.playerTwo.getName() + " you won this round.");
-            super.playerTwo.setScore(score2++);
+            //increment score first, then add it
+            super.playerTwo.setScore(++score2);
         }
         if(playerOneCardValue == playerTwoCardValue)
         {
@@ -111,12 +119,5 @@ public class WarGame extends Game
         {
             tieMessage();
         }
-    }
-
-
-
-    public static void main(String[] args)
-    {
-        new WarGame().startGame();
     }
 }

@@ -8,17 +8,18 @@ public class Craps extends Gamble{
     private ArrayList<Die> dice;
     private int timeGamePlayed;
 
-    public Craps(){
+    public Craps(String yourName){
         dice = new ArrayList<>();
         dice.add(new Die());
         dice.add(new Die());
         this.timeGamePlayed = 5;
         this.minBet = 5;
         this.maxBet = 5000;
+        super.playerOne = new Player(yourName, 500.00, 0, new ArrayList<Card>());
     }
 
     public static void main(String [] args){
-        new Craps().startGame();
+        new Craps("Tyler").startGame();
     }
 
     public void setMinBet(int theMinBet){
@@ -48,8 +49,6 @@ public class Craps extends Gamble{
     @Override
     public void startGame() {
         System.out.println("Welcome to Craps!");
-        super.playerOne = new Player("Charlotte", 500.00, 0, new ArrayList<Card>());
-        //super.playerTwo = new Player("Skylar", 500, 0, null);
 
         super.setMoneyType("dollars");
         Scanner scanner = new Scanner(System.in);
@@ -86,8 +85,9 @@ public class Craps extends Gamble{
             playerOne.setMoney(playerOne.getMoney()+ moneyPrize);
             System.out.println("Winnings: " + moneyPrize);
         }else{
-            System.out.println("Sorry you lost!");
+            System.out.println("Sorry you lost because you did not win every round played!");
         }
+        System.out.println();
     }
 
     @Override
