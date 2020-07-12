@@ -3,6 +3,7 @@ package com.codedifferently.casino;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class WarGame extends Game
 {
@@ -13,13 +14,15 @@ public class WarGame extends Game
 
     public void startGame()
     {
+        Scanner scan = new Scanner(System.in);
+
         deck.generateSpecificSizedDeck(52);
         System.out.println("Welcome to the Card Game War!");
-        System.out.println("There are 2 players for this game.");
-        System.out.println();
+        System.out.println("There are 2 players for this game. Player one enter your name");
+        super.playerOne = new Player(scan.nextLine(), 0.0, 1, deck.dealMultipleCards(5));
+        System.out.println("Player two enter your name");
+        super.playerTwo = new Player(scan.nextLine(), 0.0, 1, deck.dealMultipleCards(5));
 
-        super.playerOne = new Player("Bill", 0.0, 1, deck.dealMultipleCards(5));
-        super.playerTwo = new Player("Mandy", 0.0, 1, deck.dealMultipleCards(5));
         //System.out.println("deck size:" + deck.getNumCards());
         int score1 = 0;
         int score2 = 0;
@@ -104,6 +107,8 @@ public class WarGame extends Game
             tieMessage();
         }
     }
+
+
 
     public static void main(String[] args)
     {
