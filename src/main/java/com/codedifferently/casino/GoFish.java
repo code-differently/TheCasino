@@ -9,7 +9,7 @@ public class GoFish extends Game {
     //track each individual card value i.e. 1, 2, 3, 4, etc. and its number of occurences in the hand
     private HashMap<Player, HashMap<Integer, ArrayList<Card>>> playerHands;
     private Deck deck;
-    private boolean playerOneTurn = true;
+    private boolean playerOneTurn;
 
     public static void main(String [] args) {
         new GoFish("bob", "paul").startGame();
@@ -37,41 +37,19 @@ public class GoFish extends Game {
         //initializing this here to have it accessible to the rest of the method
         //used to get the integer value or quit
         String userChoice = "";
+        Scanner scanner = new Scanner(System.in);
         //it's 56 because we have an enum for 1 and an enum for Ace, making it 14 * 4, not 13 * 4
         this.deck.generateNonRandomizedSpecificSizedDeck(56);
 
-        Scanner scanner = new Scanner(System.in);
-//        System.out.println("Please enter your name: ");
-//
-//        //scans until the next line, trims anything before and after
-//        super.playerOne.setName(scanner.nextLine().trim());
-
-        //each player will get 7 cards
-        for(int i = 0; i < 14; i++) {
-            Card card = this.deck.dealRandomCard();
-            int valueOfCard = card.getValue().getValue();
-            //first player gets 7 cards
-            if(i < 7) {
-                playerHands.get(playerOne).get(valueOfCard).add(card);
-            }
-            //second player also gets 7 cards
-            else {
-                playerHands.get(playerTwo).get(valueOfCard).add(card);
-            }
-        }
-
-        System.out.println("Welcome to Go Fish " + playerOne.getName() + "! Each player will get 7 cards");
-        System.out.println("The game will end when the deck is out of cards (The deck at this moment has " + this.deck.getNumCards() + " cards).");
-        System.out.println("A twist to this version is that you get points if you guess a card value correctly, and the other player gets a point if you guess incorectly.");
-        System.out.println("If you guess correctly, then you'll get to go again, but beware " + playerTwo.getName() + " can do the same thing!");
-        System.out.println("The goal is to get the most number of points by the time the deck runs out of cards. If you quit, then you are assessed based off of what score you had before ending.");
-        System.out.println("And of course, you'll have to go fish if you guess incorrectly. Good luck!");
+        dealPlayerHands();
+        System.out.println(instructions());
 
         System.out.println(printOutCardValues(playerOne));
 
         //go until there are no cards left!
         while(deck.getNumCards() != 0) {
             if(playerOneTurn) {
+                //first time I do not want this to be printed out twice
                 if(count > 0) {
                     System.out.println(printOutCardValues(playerOne));
                 }
@@ -108,6 +86,32 @@ public class GoFish extends Game {
             System.out.println();
 
             checkStandings();
+        }
+    }
+
+    public String instructions() {
+        String welcome = "Welcome to Go Fish " + playerOne.getName() + "! Each player will get 7 cards.\n";
+        String gameEnds = "The game will end when the deck is out of cards (The deck at this moment has " + this.deck.getNumCards() + " cards).\n";
+        String twist = "A twist to this version is that you get points if you guess a card value correctly, and the other player gets a point if you guess incorrectly.\n";
+        String guessCorrectly = "If you guess correctly, then you'll get to go again, but beware " + playerTwo.getName() + " can do the same thing!\n";;
+        String goal = "The goal is to get the most number of points by the time the deck runs out of cards. If you quit, then you are assessed based off of what score you had before ending.\n";
+        String goodLuck = "And of course, you'll have to go fish if you guess incorrectly. Good luck!";
+        return welcome + gameEnds + twist + guessCorrectly + goal + goodLuck;
+    }
+
+    public void dealPlayerHands() {
+        //each player will get 7 cards
+        for (int i = 0; i < 14; i++) {
+            Card card = this.deck.dealRandomCard();
+            int valueOfCard = card.getValue().getValue();
+            //first player gets 7 cards
+            if (i < 7) {
+                playerHands.get(playerOne).get(valueOfCard).add(card);
+            }
+            //second player also gets 7 cards
+            else {
+                playerHands.get(playerTwo).get(valueOfCard).add(card);
+            }
         }
     }
 
@@ -177,7 +181,6 @@ public class GoFish extends Game {
             //gets all of the cards for the player
             ArrayList<Card> cardsToExchange = playerHands.get(answerer).get(randomGuess);
             //using add all and remove all instead of a for each loop because of concurrency issues
-            //playerHands.get(asker).get(randomGuess).addAll(cardsToExchange);
             //just remove the cards, its faster in the long run
             playerHands.get(answerer).get(randomGuess).removeAll(cardsToExchange);
             asker.setScore(asker.getScore() + 1);

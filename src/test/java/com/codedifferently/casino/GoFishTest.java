@@ -38,6 +38,29 @@ public class GoFishTest {
     }
 
     @Test
+    public void dealPlayerHandsTest() {
+        goFish.getDeck().generateSpecificSizedDeck(56);
+
+        goFish.dealPlayerHands();
+
+        Assert.assertTrue(goFish.getDeck().getNumCards() == 42);
+    }
+
+    @Test
+    public void instructionsTest() {
+        String expected = "Welcome to Go Fish donatello! Each player will get 7 cards.\n" +
+                           "The game will end when the deck is out of cards (The deck at this moment has 0 cards).\n" +
+                           "A twist to this version is that you get points if you guess a card value correctly, and the other player gets a point if you guess incorrectly.\n" +
+                           "If you guess correctly, then you'll get to go again, but beware raphael can do the same thing!\n" +
+                           "The goal is to get the most number of points by the time the deck runs out of cards. If you quit, then you are assessed based off of what score you had before ending.\n" +
+                           "And of course, you'll have to go fish if you guess incorrectly. Good luck!";
+
+        String actual = goFish.instructions();
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
     public void getPlayerHandsTest() {
         //there should be four people in the hashmap based on the constructor and adding the two new players in the initializer
         Assert.assertTrue(goFish.getPlayerHands().size() == 4);
