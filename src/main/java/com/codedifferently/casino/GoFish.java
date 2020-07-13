@@ -64,7 +64,7 @@ public class GoFish extends Game {
                 }
                 int guess = Integer.parseInt(userChoice);
                 if(guess < 0 || guess > 13) {
-                    guess = changeInputError(guess);
+                    guess = changeInputBecauseOfError(guess);
                 }
                 //notice how I switch who is the asker and who is the answerer
                 //the two values at the end are for testing purposes, giving a controlled value and indicating whether its for the test or not
@@ -212,7 +212,7 @@ public class GoFish extends Game {
         return str.toString().trim();
     }
 
-    public int changeInputError(int guess) {
+    public int changeInputBecauseOfError(int guess) {
         Random random = new Random();
         int newGuessValue = 0;
         //0 to 13

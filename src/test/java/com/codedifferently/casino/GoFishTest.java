@@ -201,8 +201,8 @@ public class GoFishTest {
     }
 
     @Test
-    public void errorCheckTest() {
-        int returnedGuess = goFish.changeInputError(45);
+    public void changeInputBecauseOfErrorTest() {
+        int returnedGuess = goFish.changeInputBecauseOfError(45);
         Assert.assertTrue(returnedGuess >= 0 && returnedGuess < 14);
     }
 }
